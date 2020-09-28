@@ -2,14 +2,11 @@ package com.example.noteapp
 
 import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.*
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 
@@ -48,15 +45,15 @@ class NoteAdapter(private val context: Context, private val notes: MutableList<N
             val builder = AlertDialog.Builder(context)
             builder.setTitle("Delete")
                 .setMessage("Are You Sure You Want To Delete This Note?")
-                .setPositiveButton("Yes", DialogInterface.OnClickListener { _, _ ->
+                .setPositiveButton("Yes") { _, _ ->
                     notes.removeAt(position)
                     this.notifyDataSetChanged()
                     db.deleteRecord(ids)
                     db.sqlDb!!.close()
-                })
-                .setNegativeButton("Cancel", DialogInterface.OnClickListener { dialog, _ ->
+                }
+                .setNegativeButton("Cancel") { dialog, _ ->
                     dialog.dismiss()
-                })
+                }
                 .create()
                 .show()
         }

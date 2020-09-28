@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.database.sqlite.SQLiteQueryBuilder
 
-class DbManager(private val context: Context) {
+class DbManager(context: Context) {
     val dbName = "MyNotes"
     val tableName = "notes"
     private val colId = "id"

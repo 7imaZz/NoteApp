@@ -14,8 +14,8 @@ import kotlinx.android.synthetic.main.fragment_note_details.*
  */
 class NoteDetailsFragment : Fragment() {
 
-    var isEditMode = false
-    var recordId = 0
+    private var isEditMode = false
+    private var recordId = 0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

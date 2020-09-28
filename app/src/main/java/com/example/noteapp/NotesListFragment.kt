@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.fragment_notes_list.*
  */
 class NotesListFragment : Fragment() {
 
-    var notes = mutableListOf<Note>()
+    private var notes = mutableListOf<Note>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
