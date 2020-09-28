@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@drawable/background_layout"
+    android:layout_margin="3pt">
+
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true">
+
+        <TextView
+            android:id="@+id/titleTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Title"
+            android:textColor="@color/design_default_color_primary"
+            android:textSize="18sp"/>
+        
+        <TextView
+            android:id="@+id/descTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10pt"
+            tools:text="Title Title Title Title Title Title Title Title Title Title Title"
+            android:lines="3"/>
+        <TextView
+            android:id="@+id/descAllTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10pt"
+            tools:text="Title Title Title Title Title Title Title Title Title Title Title"
+            android:visibility="gone"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"/>
+            <ImageView
+                android:id="@+id/deleteImage"
+                android:layout_width="40pt"
+                android:layout_height="20pt"
+                android:layout_marginEnd="10pt"
+                android:layout_weight="1"
+                android:src="@drawable/ic_delete_black_24dp"
+                android:contentDescription="@string/delete_icon"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackground"/>
+
+            <ImageView
+                android:id="@+id/editImage"
+                android:layout_width="40pt"
+                android:layout_height="20pt"
+                android:layout_marginEnd="10pt"
+                android:layout_weight="1"
+                android:src="@drawable/ic_edit_black_24dp"
+                android:contentDescription="@string/edit_icon"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackground"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

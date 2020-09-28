@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">NoteApp</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add">add</string>
+    <string name="close">close</string>
+    <string name="note_title">Note Title</string>
+    <string name="note_desc">Note Description</string>
+    <string name="create">Create</string>
+    <string name="delete_icon">Delete Icon</string>
+    <string name="edit_icon">Edit Icon</string>
+    <string name="voice">Voice Note</string>
+    <string name="text">Text Note</string>
+    <string name="text_notes">Text Notes</string>
+    <string name="voice_notes">Voice Notes</string>
+</resources>
