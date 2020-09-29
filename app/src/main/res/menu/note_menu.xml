@@ -7,4 +7,10 @@
         android:icon="@drawable/ic_attach_file_black_24dp"
         android:title="@string/add"
         app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/add_voice_note_menu"
+        android:icon="@drawable/ic_keyboard_voice_black_24dp"
+        android:title="@string/add_voice"
+        app:showAsAction="ifRoom"/>
 </menu>

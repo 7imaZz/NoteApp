@@ -14,4 +14,7 @@
     <string name="text">Text Note</string>
     <string name="text_notes">Text Notes</string>
     <string name="voice_notes">Voice Notes</string>
+    <string name="add_voice">Add Voice Note</string>
+    <string name="stop_icon">stop icon</string>
+    <string name="play_icon">play icon</string>
 </resources>
