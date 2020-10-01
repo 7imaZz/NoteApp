@@ -62,6 +62,7 @@ class NotesListFragment : Fragment() {
         when(item.itemId){
             R.id.add_note_menu -> view?.findNavController()?.navigate(R.id.action_notesListFragment2_to_noteDetailsFragment)
             R.id.add_voice_note_menu -> view?.findNavController()?.navigate(R.id.action_notesListFragment2_to_voiceNoteFragment)
+            R.id.voice_note_menu -> view?.findNavController()?.navigate(R.id.action_notesListFragment2_to_voiceNotesFragment)
 
         }
         return super.onOptionsItemSelected(item)

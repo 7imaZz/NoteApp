@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_notesListFragment2_to_voiceNoteFragment"
             app:destination="@id/voiceNoteFragment" />
+        <action
+            android:id="@+id/action_notesListFragment2_to_voiceNotesFragment"
+            app:destination="@id/voiceNotesFragment" />
     </fragment>
     <fragment
         android:id="@+id/noteDetailsFragment"
@@ -35,4 +38,9 @@
             android:id="@+id/action_voiceNoteFragment_to_notesListFragment2"
             app:destination="@id/notesListFragment2" />
     </fragment>
+    <fragment
+        android:id="@+id/voiceNotesFragment"
+        android:name="com.example.noteapp.VoiceNotesFragment"
+        android:label="fragment_voice_notes"
+        tools:layout="@layout/fragment_voice_notes" />
 </navigation>

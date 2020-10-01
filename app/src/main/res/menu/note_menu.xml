@@ -13,4 +13,9 @@
         android:icon="@drawable/ic_keyboard_voice_black_24dp"
         android:title="@string/add_voice"
         app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/voice_note_menu"
+        android:icon="@drawable/ic_keyboard_voice_black_24dp"
+        android:title="Voice" />
 </menu>
