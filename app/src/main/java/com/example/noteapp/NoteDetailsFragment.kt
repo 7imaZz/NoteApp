@@ -1,5 +1,6 @@
 package com.example.noteapp
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.os.Bundle
 import android.text.Editable
@@ -7,6 +8,7 @@ import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_note_details.*
 
 /**
@@ -24,9 +26,12 @@ class NoteDetailsFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_note_details, container, false)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
+
+        requireActivity().bottomNav.visibility = View.GONE
 
         if (arguments!=null){
             val title = requireArguments().getString("title")
@@ -39,17 +44,7 @@ class NoteDetailsFragment : Fragment() {
             createNoteBtn.text = "Edit"
             isEditMode = true
         }
-        descET.setOnFocusChangeListener { _, hasFocus ->
-            if (hasFocus){
-                descET.textAlignment = View.TEXT_ALIGNMENT_TEXT_START
-                descET.gravity = Gravity.START
-                descET.hint = ""
-            }else if (!hasFocus && descET.text.toString() == ""){
-                descET.textAlignment = View.TEXT_ALIGNMENT_CENTER
-                descET.gravity = Gravity.CENTER
-                descET.hint = getString(R.string.note_desc)
-            }
-        }
+
         createNoteBtn.setOnClickListener{
             if (!isEditMode) {
                 addNote(titleET.text.toString(), descET.text.toString())

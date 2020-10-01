@@ -2,15 +2,13 @@ package com.example.noteapp
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_voice_notes.*
-import java.text.SimpleDateFormat
-import java.util.*
 
 /**
  * A simple [Fragment] subclass.
@@ -35,23 +33,24 @@ class VoiceNotesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        requireActivity().bottomNav.visibility = View.VISIBLE
+
+        setHasOptionsMenu(true)
         sqlDb = VoiceNotesDbManager(requireContext())
 
         voiceNotesRV.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         voiceNotesRV.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
 
-
-
-        searchQuery("%")
+        searchQuery()
 
 
     }
 
     @SuppressLint("SimpleDateFormat")
-    private fun searchQuery(title: String){
+    private fun searchQuery(){
         val dbManager = VoiceNotesDbManager(this.requireContext())
         val projections = arrayOf(Constants().V_ID, Constants().V_COL_TITLE, Constants().V_COL_DIR, Constants().V_COL_DATE)
-        val selectionArgs = arrayOf(title)
+        val selectionArgs = arrayOf("%")
         val cursor = dbManager.query(projections, "title Like ?", selectionArgs)
 
         if(cursor.moveToFirst()){
@@ -75,4 +74,15 @@ class VoiceNotesFragment : Fragment() {
         adapter.notifyDataSetChanged()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.voice_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.add_voice_note_menu -> view?.findNavController()?.navigate(R.id.action_voiceNotesFragment_to_voiceNoteFragment)
+        }
+        return super.onOptionsItemSelected(item)
+    }
 }

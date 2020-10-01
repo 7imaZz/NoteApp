@@ -5,6 +5,7 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_notes_list.*
 
 /**
@@ -25,14 +26,17 @@ class NotesListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
 
+        requireActivity().bottomNav.visibility = View.VISIBLE
+
+
         notesRV.layoutManager = LinearLayoutManager(this.requireContext(), LinearLayoutManager.VERTICAL, false)
-        searchQuery("%")
+        searchQuery()
     }
 
-    private fun searchQuery(title: String){
+    private fun searchQuery(){
         val dbManager = DbManager(this.requireContext())
         val projections = arrayOf("id", "title", "description")
-        val selectionArgs = arrayOf(title)
+        val selectionArgs = arrayOf("%")
         val cursor = dbManager.query(projections, "title Like ?", selectionArgs)
 
         if(cursor.moveToFirst()){
@@ -46,7 +50,9 @@ class NotesListFragment : Fragment() {
             cursor.close()
             dbManager.sqlDb!!.close()
         }
-
+        if (notes.isNotEmpty()){
+            emptyTV.visibility = View.GONE
+        }
         notes.sortBy { it.id }
         notes.reverse()
         val adapter = NoteAdapter(this.requireContext(), notes)
@@ -61,9 +67,6 @@ class NotesListFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.add_note_menu -> view?.findNavController()?.navigate(R.id.action_notesListFragment2_to_noteDetailsFragment)
-            R.id.add_voice_note_menu -> view?.findNavController()?.navigate(R.id.action_notesListFragment2_to_voiceNoteFragment)
-            R.id.voice_note_menu -> view?.findNavController()?.navigate(R.id.action_notesListFragment2_to_voiceNotesFragment)
-
         }
         return super.onOptionsItemSelected(item)
     }

@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.navigation.findNavController
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,6 +19,22 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         checkPermission()
+
+        bottomNav.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.page_1 -> {
+                    // Respond to navigation item 1 click
+                    findNavController(R.id.nav_host).navigate(R.id.notesListFragment2)
+                    true
+                }
+                R.id.page_2 -> {
+                    // Respond to navigation item 2 click
+                    findNavController(R.id.nav_host).navigate(R.id.voiceNotesFragment)
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -50,6 +68,5 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
 
 }

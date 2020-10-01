@@ -12,7 +12,6 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.SeekBar
 import android.widget.TextView
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 
@@ -23,7 +22,6 @@ class VoiceNoteAdapter(val context: Context, private val voiceNotes: MutableList
 
         val titleTextView = itemView.findViewById<TextView>(R.id.titleTV)!!
         val dateTextView = itemView.findViewById<TextView>(R.id.dateTV)!!
-        val durationTextView = itemView.findViewById<TextView>(R.id.durationTV)!!
         val voiceSeekBar = itemView.findViewById<SeekBar>(R.id.seekBar)!!
         val playImageButton = itemView.findViewById<ImageButton>(R.id.playBtn)!!
     }
@@ -40,19 +38,25 @@ class VoiceNoteAdapter(val context: Context, private val voiceNotes: MutableList
     override fun onBindViewHolder(holder: VoiceNoteViewHolder, position: Int) {
         holder.titleTextView.text = voiceNotes[position].title
         holder.dateTextView.text = voiceNotes[position].date
-        holder.voiceSeekBar.isEnabled = false
 
         holder.playImageButton.setOnClickListener {
 
+            if (player!=null){
+                player!!.stop()
+                player!!.release()
+                player = null
+                holder.playImageButton.setImageResource(R.drawable.ic_play_arrow_black_24dp)
+                holder.voiceSeekBar.progress = 0
+                return@setOnClickListener
+            }
+
             holder.playImageButton.setImageResource(R.drawable.ic_stop_black_24dp)
-            holder.playImageButton.isEnabled = false
 
             val voiceNotePath = voiceNotes[position].directory
             player = MediaPlayer.create(context, Uri.parse(voiceNotePath))
             player!!.start()
 
             holder.voiceSeekBar.max = player!!.duration
-            holder.durationTextView.text = player!!.duration.toString()
             val handler = Handler()
             handler.postDelayed(object : Runnable {
                 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
@@ -62,8 +66,8 @@ class VoiceNoteAdapter(val context: Context, private val voiceNotes: MutableList
                         handler.postDelayed(this, 1000)
                         if (!player!!.isPlaying) {
                             player!!.release()
+                            player = null
                             holder.voiceSeekBar.progress = 0
-                            Toast.makeText(context, "Ended", Toast.LENGTH_SHORT).show()
                             holder.playImageButton.setImageResource(R.drawable.ic_play_arrow_black_24dp)
                             holder.playImageButton.isEnabled = true
                         }

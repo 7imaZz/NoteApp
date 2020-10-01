@@ -7,7 +7,6 @@ import android.content.SharedPreferences
 import android.media.MediaRecorder
 import android.os.Build
 import android.os.Bundle
-import android.os.Environment
 import android.os.SystemClock
 import android.view.*
 import android.widget.ImageButton
@@ -15,6 +14,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_voice_note.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -47,6 +47,9 @@ class VoiceNoteFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        requireActivity().bottomNav.visibility = View.GONE
+
         setHasOptionsMenu(true)
         editor = requireContext().getSharedPreferences(recordCount, Context.MODE_PRIVATE).edit()
         sqlDb = VoiceNotesDbManager(requireContext())
@@ -84,14 +87,14 @@ class VoiceNoteFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.close_menu -> view?.findNavController()?.navigate(R.id.action_voiceNoteFragment_to_notesListFragment2)
+            R.id.close_menu -> view?.findNavController()?.navigate(R.id.action_voiceNoteFragment_to_voiceNotesFragment)
         }
         return super.onOptionsItemSelected(item)
     }
 
     private fun setupMediaRecorder(){
         myAudioRecorder = MediaRecorder()
-        outputfile = Environment.getExternalStorageDirectory().absolutePath+"/voiceRecord${c}.3gpp"
+        outputfile = requireContext().getExternalFilesDir(null)!!.absolutePath+"/voiceRecord${c}.3gpp"
         editor.putInt("count", ++c)
         editor.apply()
         myAudioRecorder!!.setAudioSource(MediaRecorder.AudioSource.MIC)
